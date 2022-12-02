@@ -1,0 +1,89 @@
+@use "sass:color";
+.notice-card {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  border-radius: 0.6vw;
+  overflow: hidden;
+  padding: 1.2vw;
+  padding-bottom: 0.8vw;
+  -webkit-box-shadow: 0 0.06vw 0.12vw 0 rgba(0, 0, 0, 0.15);
+          box-shadow: 0 0.06vw 0.12vw 0 rgba(0, 0, 0, 0.15);
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.notice-card:hover {
+  -webkit-box-shadow: 0 0.12vw 0.24vw 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0 0.12vw 0.24vw 0 rgba(0, 0, 0, 0.2);
+}
+
+.notice-card-title {
+  font-family: "Roboto";
+  font-weight: 400;
+  font-size: 1.1vw;
+  color: rgba(0, 0, 0, 0.95);
+  margin: 0;
+  padding: 0;
+}
+
+.notice-card-text {
+  font-family: "Roboto";
+  font-size: 0.9vw;
+  color: rgba(0, 0, 0, 0.85);
+  margin: 0;
+  padding: 0;
+  padding-top: 0.8vw;
+  white-space: pre-wrap !important;
+}
+
+.notice-card-time {
+  font-family: "Roboto";
+  font-size: 0.8vw;
+  color: rgba(0, 0, 0, 0.75);
+  margin: 0;
+  padding: 0;
+  padding-top: 1vw;
+  text-align: right;
+}
+
+.notice-card-image {
+  display: block;
+  height: 18vw;
+  width: auto;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.notice-card-button {
+  text-align: center;
+  background-color: #009efb;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.9);
+  font-family: "Open Sans";
+  font-size: 1vw;
+  border-radius: 0.1vw;
+  vertical-align: middle;
+  width: 50%;
+  height: 1.8vw;
+  margin-left: 25%;
+  margin-top: 0.5vw;
+}
+
+.notice-card-button:hover {
+  background-color: #25aeff;
+}
+
+.notice-card-button-text {
+  font-family: "Roboto";
+  font-size: 1vw;
+  color: white;
+  margin: 0;
+  padding: 0;
+  padding-top: 0.25vw;
+  white-space: pre-wrap;
+}
+/*# sourceMappingURL=NoticeCard.module.css.map */

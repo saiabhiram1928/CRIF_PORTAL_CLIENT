@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "ACAA,IAAI,CAAJ,YAAI;ADEJ,AAAA,cAAc,CAAC;EACb,gBAAgB,EC+BJ,OAAgB;ED9B5B,MAAM,EAAE,IAAI;EACZ,OAAO,EAAE,IAAI;EACb,MAAM,EAAE,OAAO;EACf,KAAK,EAAE,wBAAqB;EAC5B,WAAW,EAAE,WAAW;EACxB,SAAS,EAAE,GAAG;EACd,aAAa,EAAE,KAAK;CAKrB;;AAbD,AAUE,cAVY,AAUX,MAAM,CAAC;EACN,gBAAgB,EAAE,OAAyB;CAC5C",
+    "sources": [
+        "SubmitButton.module.scss",
+        "../../../styles/_variables.scss"
+    ],
+    "names": [],
+    "file": "SubmitButton.module.css"
+}

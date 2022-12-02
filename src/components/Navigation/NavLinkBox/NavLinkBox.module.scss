@@ -1,0 +1,57 @@
+@import "../../../styles/variables";
+
+.sidebar__navlink__box {
+  width: 90%;
+  height: 2.4vw;
+  color: inherit;
+  border: none;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  background-color: $sidebarColor;
+  margin: 0.2vw 0;
+  padding: 0 1vw;
+  border-radius: 0.3vw;
+  text-align: left;
+}
+
+.sidebar__navlink__box-active,
+.sidebar__navlink__box:hover {
+  width: 90%;
+  height: 2.4vw;
+  color: inherit;
+  border: none;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  background-color: $sidebarSecColor;
+  margin: 0.2vw 0;
+  padding: 0 1vw;
+  border-radius: 0.3vw;
+  text-align: left;
+}
+
+.sidebar__navlink {
+  color: $sidebarTextColor;
+  text-decoration: none;
+
+  &:hover{
+    color: $sidebarSecTextColor;
+  }
+}
+
+.sidebar__navlink-active {
+  color: $sidebarSecTextColor;
+  text-decoration: none;
+}
+
+.sidebar__navlink__box-grid {
+  display: grid;
+  grid-template-columns: 1fr 4.6fr;
+  align-items: center;
+}
+
+.sidebar__icon {
+  padding-top: 0.3vw;
+  font-size: $sidebarIconSize;
+}

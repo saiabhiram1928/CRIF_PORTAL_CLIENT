@@ -1,0 +1,16 @@
+@use "sass:color";
+.submit-button {
+  background-color: #009efb;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.9);
+  font-family: "Open Sans";
+  font-size: 1vw;
+  border-radius: 0.8vw;
+}
+
+.submit-button:hover {
+  background-color: #25aeff;
+}
+/*# sourceMappingURL=SubmitButton.module.css.map */

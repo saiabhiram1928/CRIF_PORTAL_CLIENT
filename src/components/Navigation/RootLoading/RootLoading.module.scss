@@ -1,0 +1,17 @@
+@import "../../../styles/variables";
+
+.root-loading-div {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  background-color: $paletteViolet;
+}
+.root-loading-image {
+  width: 10vw;
+}

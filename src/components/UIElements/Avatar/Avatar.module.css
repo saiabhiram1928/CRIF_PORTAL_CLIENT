@@ -1,0 +1,10 @@
+@use "sass:color";
+.avatar {
+  display: block;
+  width: 5vw;
+  height: 5vw;
+  background-size: cover;
+  background-position: top center;
+  border-radius: 50%;
+}
+/*# sourceMappingURL=Avatar.module.css.map */

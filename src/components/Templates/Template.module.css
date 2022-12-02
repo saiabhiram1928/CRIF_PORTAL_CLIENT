@@ -1,0 +1,40 @@
+.grid-card-stat-plot-value {
+  font-family: "Rubik";
+  font-weight: 400;
+  font-size: 1.6vw;
+  color: rgba(0, 0, 0, 0.65);
+  margin: 0;
+  padding: 0.6vw 0vw 0vw 1vw;
+}
+
+.grid-card-stat-plot-name {
+  font-family: "Rubik";
+  font-size: 0.85vw;
+  font-weight: 500;
+  margin: 0;
+  padding: 0.3vw 0vw 0vw 1vw;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.grid-card-stat-plot-icon {
+  font-size: 1.6vw;
+  margin: 0;
+  padding: 0.6vw 1vw 0vw 0vw;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}
+
+.grid-card-stat-plot-icon-value {
+  font-family: "Rubik";
+  font-size: 0.85vw;
+  font-weight: 600;
+  margin: 0;
+  padding: 0vw 1vw 0vw 0vw;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  -ms-grid-column-align: center;
+      justify-self: center;
+}
+/*# sourceMappingURL=Template.module.css.map */

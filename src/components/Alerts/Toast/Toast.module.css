@@ -1,0 +1,38 @@
+@use "sass:color";
+.toast-container {
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.toast-icon {
+  width: 18%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.toast-message-div {
+  width: 82%;
+}
+
+.toast-message {
+  margin: 0;
+  padding: 0;
+  font-size: 0.9vw;
+}
+/*# sourceMappingURL=Toast.module.css.map */

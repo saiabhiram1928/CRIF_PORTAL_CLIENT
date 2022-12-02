@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "ACAA,IAAI,CAAJ,YAAI;ADEJ,AAAA,OAAO,CAAC;EACJ,OAAO,EAAE,KAAK;EACd,KAAK,EC8CW,GAAG;ED7CnB,MAAM,EC6CU,GAAG;ED5CnB,eAAe,EAAE,KAAK;EACtB,mBAAmB,EAAE,UAAU;EAC/B,aAAa,EAAE,GAAG;CACrB",
+    "sources": [
+        "Avatar.module.scss",
+        "../../../styles/_variables.scss"
+    ],
+    "names": [],
+    "file": "Avatar.module.css"
+}

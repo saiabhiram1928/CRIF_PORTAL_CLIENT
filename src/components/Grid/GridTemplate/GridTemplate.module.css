@@ -1,0 +1,13 @@
+.main-grid {
+  display: -ms-grid;
+  display: grid;
+  margin: 0vw 5vw;
+  padding: 0;
+  gap: 1.6vw;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+}
+/*# sourceMappingURL=GridTemplate.module.css.map */

@@ -1,0 +1,200 @@
+@use "sass:color";
+.banner-main-text {
+  display: block;
+  font-size: 2vw;
+  color: black;
+  margin: 0;
+  font-family: "Montserrat";
+  font-weight: 600;
+}
+
+.banner-main-text-dark {
+  display: block;
+  font-size: 2vw;
+  color: white;
+  margin: 0;
+  font-family: "Montserrat";
+  font-weight: 600;
+}
+
+.banner-sub-text-dark {
+  font-size: 1.05vw;
+  color: #a6b4c7;
+  margin: 0;
+  font-family: "Roboto";
+}
+
+.text-field {
+  border: none;
+  outline: none;
+  font-size: 1vw;
+  color: rgba(0, 0, 0, 0.75);
+  font-family: "Roboto";
+  padding: 0.2vw 0.5vw;
+  background-color: white;
+  border: 0.12vw solid transparent;
+  border-bottom: 0.12vw solid rgba(0, 0, 0, 0.1);
+}
+
+.text-field:focus {
+  border: 0.12vw solid #1171ef;
+  background-color: #fcfcff;
+  -webkit-transition-timing-function: linear;
+          transition-timing-function: linear;
+  -webkit-transition: border 400ms;
+  transition: border 400ms;
+}
+
+.select-field {
+  border: none;
+  outline: none;
+  font-size: 1vw;
+  width: 100%;
+  height: 2.4vw;
+  color: rgba(0, 0, 0, 0.75);
+  font-family: "Roboto";
+  background-color: white;
+  border: 0.12vw solid transparent;
+  border-bottom: 0.12vw solid rgba(0, 0, 0, 0.1);
+}
+
+.select-field:focus-within {
+  border: 0.12vw solid #1171ef;
+  background-color: #fcfcff;
+  -webkit-transition-timing-function: linear;
+          transition-timing-function: linear;
+  -webkit-transition: border 400ms;
+  transition: border 400ms;
+}
+
+.submit-button {
+  background-color: #7367f0;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: white;
+  font-family: "Open Sans";
+  font-size: 1vw;
+  border-radius: 4vw;
+  font-size: 1vw;
+  font-family: Arial;
+  font-weight: 500;
+}
+
+.submit-button:hover {
+  background-color: #5e50ee;
+}
+
+.submit-button:disabled {
+  background-color: rgba(0, 0, 0, 0.35);
+}
+
+.blue-button {
+  background-color: #009efb;
+  color: white;
+  font-size: 0.9vw;
+  font-family: "Arial";
+  font-weight: 500;
+}
+
+.blue-button:hover {
+  background-color: #0084d2;
+}
+
+.green-button {
+  background-color: #55ce63;
+  color: white;
+  font-size: 0.9vw;
+  font-family: "Arial";
+  font-weight: 500;
+}
+
+.green-button:hover {
+  background-color: #38c248;
+}
+
+.field-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.field-error {
+  margin: 0;
+  padding: 0;
+  font-size: 0.75vw;
+  color: red;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+  -ms-grid-column-align: end;
+      justify-self: end;
+}
+
+.grid-card-plot-title {
+  font-family: "Roboto";
+  font-weight: 400;
+  font-size: 1.14vw;
+  color: rgba(0, 0, 0, 0.9);
+  margin: 0;
+  padding: 0;
+  padding-top: 1vw;
+  padding-left: 1.4vw;
+}
+
+.grid-card-plot-dark-title {
+  font-family: "Roboto";
+  font-weight: 400;
+  font-size: 1.14vw;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+  padding: 0;
+  padding-top: 1vw;
+  padding-left: 1.4vw;
+}
+
+.grid-card-text {
+  font-family: "Roboto";
+  font-weight: 400;
+  font-size: 1.0vw;
+  color: rgba(0, 0, 0, 0.75);
+  margin: 0;
+  padding: 0;
+  padding-top: 1vw;
+  padding-bottom: 1vw;
+  padding-left: 1.4vw;
+  padding-right: 1.4vw;
+  line-height: 140%;
+}
+
+.alert-title {
+  margin: 0;
+  padding: 0;
+  font-size: 2vw;
+}
+
+.alert-loader {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 5vw;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+}
+
+.toast-root-container {
+  width: 20vw;
+}
+/*# sourceMappingURL=Global.module.css.map */

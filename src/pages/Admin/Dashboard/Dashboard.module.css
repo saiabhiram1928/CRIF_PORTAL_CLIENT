@@ -1,0 +1,6 @@
+@use "sass:color";
+.applications_id {
+  font-size: 1.1vw;
+  color: rgba(0, 0, 0, 0.85);
+}
+/*# sourceMappingURL=Dashboard.module.css.map */

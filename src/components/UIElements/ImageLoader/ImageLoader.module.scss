@@ -1,0 +1,18 @@
+@import "../../../styles/variables";
+
+.notice-card-image {
+  margin-bottom: 0.5vw;
+  margin-top: 0.5vw;
+  margin-right: auto;
+  margin-left: auto;
+  display: block;
+  height: 18vw;
+  width: auto;
+  grid-column-start: 1;
+  grid-row-start: 1;
+}
+
+.notice-card-image-div {
+  display: grid;
+  grid-template-columns: 1fr;
+}

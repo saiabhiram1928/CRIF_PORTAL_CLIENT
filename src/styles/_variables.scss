@@ -1,0 +1,68 @@
+@use "sass:color";
+
+// Color Palette
+$paletteBlue: rgb(17, 113, 239);
+$paletteBlueDark: rgb(0, 69, 158);
+$paletteBlueTrans: rgba(17, 113, 239, 0.2);
+
+$paletteCyan: rgb(17, 205, 239);
+
+$paletteGreen: rgb(16, 202, 147);
+$paletteGreenTrans: rgba(16, 202, 147, 0.2);
+
+$paletteGrey: rgb(100, 100, 100);
+$paletteGreyLighter: rgb(245, 245, 245);
+$paletteGreyLight: rgb(180, 180, 180);
+$paletteGreyDark: rgb(64, 64, 64);
+
+$palettePurple: rgb(153, 102, 255);
+$palettePurpleDark: rgb(115,103,240);
+$palettePurpleTrans: rgba(153, 102, 255, 0.2);
+
+$paletteRed: rgb(242, 87, 103);
+$paletteRedTrans: rgba(242, 87, 103, 0.2);
+
+$paletteViolet: rgb(15, 23, 42);
+$paletteVioletLighter: rgb(166, 180, 199);
+$paletteVioletLight: rgb(30, 41, 59);
+$paletteVioletDark: rgb(8, 13, 25);
+
+$paletteYellow: rgb(255, 159, 0);
+$paletteYellowTrans: rgba(255, 159, 0, 0.2);
+
+// Notif
+$paletteSuccess: rgb(85, 206, 99);
+$paletteInfo: rgb(0, 158, 251);
+$paletteWarn: rgb(255, 188, 52);
+$paletteDanger: rgb(246, 45, 81);
+
+// Body
+$bodyColor: $paletteGreyLighter;
+
+// Sidebar
+$sidebarWidth: 15vw;
+$sidebarColor: $paletteViolet;
+$sidebarSecColor: rgba(255, 255, 255, 0.14);
+$sidebarTextColor: rgba(255, 255, 255, 0.65);
+$sidebarSecTextColor: rgba(255, 255, 255, 1);
+$sidebarFont: "Lato", sans-serif;
+$sidebarFontSize: 0.9vw;
+$sidebarIconSize: 1.2vw;
+$sidebarAvatarSize: 5vw;
+
+// Scrollbar
+$scrollbarTrack: $paletteVioletLighter;
+$scrollbarThumb: $paletteBlue;
+$scrollbarThumbHover: $paletteBlueDark;
+
+// Topbar
+$topbarHeight: 3vw;
+$topbarWidth: 100vw - $sidebarWidth;
+$topbarColor: rgb(255, 255, 255);
+$topbarTextColor: $paletteGreyDark;
+
+// Main Content
+$MainContentWidth: 100vw - $sidebarWidth;
+
+// Welcome Banner
+$welcomeBannerColor: $paletteVioletLight;

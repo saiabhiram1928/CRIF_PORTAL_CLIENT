@@ -1,0 +1,25 @@
+@import "../../styles/variables";
+
+// TOPBAR
+.topbar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: $topbarHeight;
+  width: $topbarWidth;
+  background-color: $topbarColor;
+  color: $topbarTextColor;
+  box-shadow: 0 0.12vw 0.24vw 0 rgba(0, 0, 0, 0.15);
+}
+.topbar__options {
+  position: absolute;
+  top: 0.8vw;
+  right: 1vw;
+  width: 5vw;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 1.5vw;
+}
+.topbar__options__icons {
+  font-size: 1.3vw;
+}

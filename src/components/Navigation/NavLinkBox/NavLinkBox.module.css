@@ -1,0 +1,61 @@
+@use "sass:color";
+.sidebar__navlink__box {
+  width: 90%;
+  height: 2.4vw;
+  color: inherit;
+  border: none;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  background-color: #0f172a;
+  margin: 0.2vw 0;
+  padding: 0 1vw;
+  border-radius: 0.3vw;
+  text-align: left;
+}
+
+.sidebar__navlink__box-active,
+.sidebar__navlink__box:hover {
+  width: 90%;
+  height: 2.4vw;
+  color: inherit;
+  border: none;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  background-color: rgba(255, 255, 255, 0.14);
+  margin: 0.2vw 0;
+  padding: 0 1vw;
+  border-radius: 0.3vw;
+  text-align: left;
+}
+
+.sidebar__navlink {
+  color: rgba(255, 255, 255, 0.65);
+  text-decoration: none;
+}
+
+.sidebar__navlink:hover {
+  color: white;
+}
+
+.sidebar__navlink-active {
+  color: white;
+  text-decoration: none;
+}
+
+.sidebar__navlink__box-grid {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 4.6fr;
+      grid-template-columns: 1fr 4.6fr;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.sidebar__icon {
+  padding-top: 0.3vw;
+  font-size: 1.2vw;
+}
+/*# sourceMappingURL=NavLinkBox.module.css.map */

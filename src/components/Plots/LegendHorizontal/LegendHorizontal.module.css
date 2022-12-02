@@ -1,0 +1,39 @@
+.legend-horizontal {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  margin: 0;
+  padding: 0;
+  padding-top: 1.2vw;
+  padding-right: 1.6vw;
+}
+
+.legend-horizontal__item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  justify-items: center;
+  margin: 0;
+  padding: 0;
+  margin-left: 1.2vw;
+}
+
+.legend-horizontal__item__icon {
+  margin-right: 0.3vw;
+  font-size: 0.8vw;
+}
+
+.legend-horizontal__item__text {
+  font-family: "Lato";
+  font-size: 0.8vw;
+  margin: 0;
+  padding: 0;
+  padding-bottom: 0.1vw;
+}
+/*# sourceMappingURL=LegendHorizontal.module.css.map */

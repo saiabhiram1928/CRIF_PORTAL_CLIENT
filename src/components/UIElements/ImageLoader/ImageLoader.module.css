@@ -1,0 +1,22 @@
+@use "sass:color";
+.notice-card-image {
+  margin-bottom: 0.5vw;
+  margin-top: 0.5vw;
+  margin-right: auto;
+  margin-left: auto;
+  display: block;
+  height: 18vw;
+  width: auto;
+  -ms-grid-column: 1;
+      grid-column-start: 1;
+  -ms-grid-row: 1;
+      grid-row-start: 1;
+}
+
+.notice-card-image-div {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
+}
+/*# sourceMappingURL=ImageLoader.module.css.map */

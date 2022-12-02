@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "ACAA,IAAI,CAAJ,YAAI;ADEJ,AAAA,iBAAiB,CAAC;EAChB,KAAK,EAAE,KAAK;EACZ,MAAM,EAAE,KAAK;EACb,QAAQ,EAAE,MAAM;EAChB,OAAO,EAAE,IAAI;EACb,cAAc,EAAE,MAAM;EACtB,eAAe,EAAE,MAAM;EACvB,WAAW,EAAE,MAAM;EACnB,MAAM,EAAE,CAAC;EACT,OAAO,EAAE,CAAC;EACV,gBAAgB,ECYF,OAAe;CDX9B;;AACD,AAAA,mBAAmB,CAAC;EAClB,KAAK,EAAE,IAAI;CACZ",
+    "sources": [
+        "RootLoading.module.scss",
+        "../../../styles/_variables.scss"
+    ],
+    "names": [],
+    "file": "RootLoading.module.css"
+}

@@ -1,0 +1,40 @@
+.card-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+  padding: 1.5vw 1.3vw 1.3vw 1.3vw;
+}
+
+.card-form-start {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  padding: 1.5vw 1.3vw 1.3vw 1.3vw;
+}
+
+.one-field {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1vw;
+}
+
+.two-fields {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.right-field {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  align-items: center;
+}

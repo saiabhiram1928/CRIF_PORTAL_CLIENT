@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "ACAA,IAAI,CAAJ,YAAI;ADEJ,AAAA,kBAAkB,CAAC;EACjB,aAAa,EAAE,KAAK;EACpB,UAAU,EAAE,KAAK;EACjB,YAAY,EAAE,IAAI;EAClB,WAAW,EAAE,IAAI;EACjB,OAAO,EAAE,KAAK;EACd,MAAM,EAAE,IAAI;EACZ,KAAK,EAAE,IAAI;EACX,iBAAiB,EAAE,CAAC;EACpB,cAAc,EAAE,CAAC;CAClB;;AAED,AAAA,sBAAsB,CAAC;EACrB,OAAO,EAAE,IAAI;EACb,qBAAqB,EAAE,GAAG;CAC3B",
+    "sources": [
+        "ImageLoader.module.scss",
+        "../../../styles/_variables.scss"
+    ],
+    "names": [],
+    "file": "ImageLoader.module.css"
+}
