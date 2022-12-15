@@ -16,19 +16,19 @@ import DoughnutPlotWLegend from "../../../components/Templates/DoughnutPlotWLege
 import StatWLineChartNG from "../../../components/Templates/StatWLineChartNG";
 
 const Dashboard = () => {
-  const { userDetails } = useAuth();
-  return (
-    <MainContent>
-      <TextBanner height="8vw" bgColor={ColorPalette.violet.light}>
-        <p className={gstyles["banner-main-text-dark"]}>
-          Hello, {userDetails.first_name} !
-        </p>
-        <MarginBox margin="0.3vw" />
-        <p className={gstyles["banner-sub-text-dark"]}>
-          Your Access Level: CRIF Admin
-        </p>
-      </TextBanner>
-      <GridTemplate
+    const { userDetails } = useAuth();
+    return (
+        <MainContent>
+            <TextBanner height="8vw" bgColor={ColorPalette.violet.light}>
+                <p className={gstyles["banner-main-text-dark"]}>
+                    Hello, {userDetails.first_name} !
+                </p>
+                <MarginBox margin="0.3vw" />
+                <p className={gstyles["banner-sub-text-dark"]}>
+                    Your Access Level: CRIF Admin
+                </p>
+            </TextBanner>
+            {/* <GridTemplate
         rows="repeat(17, 1fr)"
         cols="repeat(12, 1fr)"
         width="75vw"
@@ -164,9 +164,9 @@ const Dashboard = () => {
             brdColor={ColorPalette.yellow.primary}
           />
         </GridCard>
-      </GridTemplate>
-    </MainContent>
-  );
+      </GridTemplate> */}
+        </MainContent>
+    );
 };
 
 export default Dashboard;
