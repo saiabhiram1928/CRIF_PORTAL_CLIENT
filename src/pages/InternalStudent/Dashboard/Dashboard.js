@@ -18,48 +18,45 @@ const Dashboard = () => {
     const [loadingData, setLoadingData] = useState(true);
     const [applications, setApplications] = useState([]);
 
-    const [file, setFile] = useState();
-    const [fileName, setFileName] = useState({});
+    const [file, setFile] = useState({});
 
-    // ! change logic for paymentslip upload
+    console.log(userDetails);
+
+    // Payment slip upload logic
     const handleUploadBtnClick = (e) => {
         e.preventDefault();
-        document.getElementById(`paymentSlipChooseFile-${e.target.id}`).click();
-        const updateKey = e.target.id;
-        console.log(typeof updateKey, e.target.files[0]);
-        setFileName((prevState) => ({
-            ...prevState,
-            updateKey: e.target.files[0],
+        document.getElementById(`choosePaymentSlip-${e.target.id}`).click();
+    };
+
+    const onFileSelectChange = (e) => {
+        const application_id = e.target.id.split("-")[1];
+        setFile((prevValue) => ({
+            ...prevValue,
+            [application_id]: e.target.files[0],
         }));
     };
 
-    const handlePaymentSlipUpload = async (e) => {
+    const onFileUploadSubmit = async (e) => {
         const formData = new FormData();
-        formData.append("paymentSlip", {});
-        console.log(formData.get("paymentSlip"));
+        const id = e.target.id.split("-")[1];
+        formData.append("file", file[id]);
+        console.log(file);
         await axios
             .post(
                 process.env.REACT_APP_BACKEND_API_URL +
                     "/applications/uploadPaymentSlip",
+                formData,
                 {
-                    params: { email: userDetails.email },
-                    formData,
-                },
-                {
-                    headers: {
-                        Accept: "multipart/form-data",
-                    },
+                    params: { email: userDetails.email, application_id: id },
                 }
             )
             .then((res) => {
                 console.log(res);
-                const id = e.target.id.split("-")[1];
-                setFileName((prevState) => ({ ...prevState, [id]: null }));
+                setFile((prevValue) => ({ ...prevValue, [id]: null }));
             })
             .catch((err) => {
                 console.log(err);
             });
-        console.log("THE END");
     };
 
     const getApplicationsData = useCallback(async () => {
@@ -74,7 +71,6 @@ const Dashboard = () => {
             )
             .then((response) => {
                 let applicationsRender = [];
-                console.log(response.data);
                 if (response.data.length > 0) {
                     for (var item of response.data) {
                         let samplesRender = [];
@@ -448,7 +444,7 @@ const Dashboard = () => {
                                             }}
                                             onClick={handleUploadBtnClick}
                                             disabled={
-                                                fileName[
+                                                file[
                                                     `${item.application_id}`
                                                 ] === null
                                             }
@@ -457,17 +453,43 @@ const Dashboard = () => {
                                             Upload Payment Slip
                                         </button>
                                         <input
-                                            id={`paymentSlipChooseFile-${item.application_id}`}
+                                            id={`choosePaymentSlip-${item.application_id}`}
                                             type="file"
                                             name="file"
                                             style={{
-                                                marginLeft: "100px",
                                                 display: "none",
-                                                fontSize: "10px",
                                             }}
-                                            onChange={handlePaymentSlipUpload}
+                                            onChange={onFileSelectChange}
                                         />
                                     </div>
+                                    {file[`${item.application_id}`] ? (
+                                        <div
+                                            style={{
+                                                display: "flex",
+                                                justifyContent: "right",
+                                                marginBottom: "0.5vw",
+                                            }}
+                                        >
+                                            <button
+                                                id={`submitBtnPaymentSlip-${item.application_id}`}
+                                                className={
+                                                    gstyles["submit-button"]
+                                                }
+                                                style={{
+                                                    width: "100%",
+                                                    height: "2.4vw",
+                                                    textAlign: "center",
+                                                    background: "red",
+                                                }}
+                                                onClick={onFileUploadSubmit}
+                                            >
+                                                {" "}
+                                                Submit
+                                            </button>
+                                        </div>
+                                    ) : (
+                                        ""
+                                    )}
 
                                     <div key="samplesRender">
                                         {samplesRender}
@@ -509,7 +531,7 @@ const Dashboard = () => {
                     />
                 );
             });
-    }, [userDetails, fileName]);
+    }, [userDetails, file]);
 
     useEffect(() => {
         getApplicationsData();
