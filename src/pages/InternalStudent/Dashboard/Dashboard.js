@@ -20,7 +20,7 @@ const Dashboard = () => {
 
     const [file, setFile] = useState({});
 
-    console.log(userDetails);
+    // ? [DONE] ! At initial render check if payment slip for particular application is, If yes then change the state of upload btn accordingly
 
     // Payment slip upload logic
     const handleUploadBtnClick = (e) => {
@@ -44,13 +44,14 @@ const Dashboard = () => {
         await axios
             .post(
                 process.env.REACT_APP_BACKEND_API_URL +
-                    "/applications/uploadPaymentSlip",
+                    "/files/uploadPaymentSlip",
                 formData,
                 {
                     params: { email: userDetails.email, application_id: id },
                 }
             )
             .then((res) => {
+                // Todo: Add notification here for successfull upload of payment slip
                 console.log(res);
                 setFile((prevValue) => ({ ...prevValue, [id]: null }));
             })
@@ -536,6 +537,26 @@ const Dashboard = () => {
     useEffect(() => {
         getApplicationsData();
     }, [getApplicationsData]);
+
+    useEffect(() => {
+        async function fetchPaymentSlipStatus() {
+            await axios
+                .post(
+                    process.env.REACT_APP_BACKEND_API_URL +
+                        "/files/getPaymentSlipsByEmail",
+                    {
+                        params: { email: userDetails.email },
+                    }
+                )
+                .then((response) => {
+                    response.data.paymentSlipsUploaded.forEach((item) => {
+                        file[item] = null;
+                    });
+                })
+                .catch((err) => console.log(err));
+        }
+        fetchPaymentSlipStatus();
+    }, []);
 
     return (
         <MainContent>
