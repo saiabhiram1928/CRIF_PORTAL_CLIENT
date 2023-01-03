@@ -39,10 +39,43 @@ const Dashboard = () => {
                     },
                 }
             )
-            .then((response) => {
+            .then(async (response) => {
                 let applicationsRender = [];
                 if (response.data.length > 0) {
                     for (var item of response.data) {
+                        // ? Do something about this logic :
+                        // TODO: Currently image is coming using statically served link from backend. Ultimate goal to preserve privacy is to send image as the stream of data to frontend. Convert that data to bit64 then serve it as an image.
+                        let image;
+                        let base64Image;
+                        let path = `${process.env.REACT_APP_BACKEND_API_URL}/${item.email}/${item.application_id}`;
+                        console.log("Original Path : ", path);
+                        try {
+                            image = await axios.post(
+                                process.env.REACT_APP_BACKEND_API_URL +
+                                    "/files/downloadPaymentSlip",
+                                {
+                                    params: {
+                                        email: item.email,
+                                        application_id: item.application_id,
+                                    },
+                                    responseType: "arraybuffer",
+                                }
+                            );
+                            // ! This logic is not working
+                            base64Image = btoa(
+                                new Uint8Array(image.data).reduce(
+                                    (data, byte) =>
+                                        data + String.fromCharCode(byte),
+                                    ""
+                                )
+                            );
+                            // ? Using Static link generated from backend here
+                            path = `${process.env.REACT_APP_BACKEND_API_URL}\\${image.data.filePath}`;
+                            console.log("Mooded Path : ", path);
+                        } catch (err) {
+                            console.log(err);
+                        }
+
                         let samplesRender = [];
                         for (var sample of item.data) {
                             let sampleRender = [];
@@ -413,9 +446,9 @@ const Dashboard = () => {
                                                     width: "50%",
                                                     title: (
                                                         <img
-                                                            src="https://www.hrcabin.com/wp-content/uploads/2022/09/Salary-slip-format-in-Excel-download.png"
-                                                            alt="Girl in a jacket"
-                                                            width="100%"
+                                                            src={path}
+                                                            alt="Payment Slip"
+                                                            width="50%"
                                                             height="100%"
                                                         />
                                                     ),
