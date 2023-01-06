@@ -7,6 +7,7 @@ import { useAuth } from "../Authenticate/AuthContext";
 // <-- Public -->
 import SignIn from "../../pages/Public/SignIn/SignIn";
 import SignUp from "../../pages/Public/SignUp/SignUp";
+import ForgotPassword from "../../pages/Public/ForgotPassword/ForgotPassword";
 
 // <-- General -->
 import PageNotFound from "../../pages/Shared/PageNotFound";
@@ -34,105 +35,109 @@ import ICPOES from "../../pages/Shared/ICPOES";
 import PL from "../../pages/Shared/PL";
 
 const ManagedRouter = () => {
-  const { userDetails, currentUser } = useAuth();
-  return (
-    <React.Fragment>
-      <ToastContainer
-        autoClose={4000}
-        className={gstyles["toast-root-container"]}
-      />
+    const { userDetails, currentUser } = useAuth();
+    return (
+        <React.Fragment>
+            <ToastContainer
+                autoClose={4000}
+                className={gstyles["toast-root-container"]}
+            />
 
-      {!currentUser && (
-        <Switch>
-          <Route exact path="/">
-            <SignIn />
-          </Route>
+            {!currentUser && (
+                <Switch>
+                    <Route exact path="/">
+                        <SignIn />
+                    </Route>
 
-          <Route exact path="/signup">
-            <SignUp />
-          </Route>
+                    <Route exact path="/signup">
+                        <SignUp />
+                    </Route>
 
-          <Route path="*">
-            <Redirect to="/" />
-          </Route>
-        </Switch>
-      )}
+                    <Route exact path="/forgot-password">
+                        <ForgotPassword />
+                    </Route>
 
-      {currentUser && userDetails && userDetails.role === "admin" && (
-        <AdminFormat>
-          <Switch>
-            <Route exact path="/">
-              <AdminDashboard />
-            </Route>
+                    <Route path="*">
+                        <Redirect to="/" />
+                    </Route>
+                </Switch>
+            )}
 
-            <Route exact path="/manage-equipments">
-              <ManageEquipments />
-            </Route>
+            {currentUser && userDetails && userDetails.role === "admin" && (
+                <AdminFormat>
+                    <Switch>
+                        <Route exact path="/">
+                            <AdminDashboard />
+                        </Route>
 
-            <Route exact path="/applications">
-              <Applications />
-            </Route>
+                        <Route exact path="/manage-equipments">
+                            <ManageEquipments />
+                        </Route>
 
-            <Route path="*">
-              <PageNotFound />
-            </Route>
-          </Switch>
-        </AdminFormat>
-      )}
+                        <Route exact path="/applications">
+                            <Applications />
+                        </Route>
 
-      {currentUser && userDetails && userDetails.role === "faculty" && (
-        <FacultyFormat>
-          <Switch>
-            <Route exact path="/">
-              <FacultyDashboard />
-            </Route>
+                        <Route path="*">
+                            <PageNotFound />
+                        </Route>
+                    </Switch>
+                </AdminFormat>
+            )}
 
-            <Route exact path="/incharge">
-              <InchargeDashboard />
-            </Route>
+            {currentUser && userDetails && userDetails.role === "faculty" && (
+                <FacultyFormat>
+                    <Switch>
+                        <Route exact path="/">
+                            <FacultyDashboard />
+                        </Route>
 
-            <Route path="*">
-              <PageNotFound />
-            </Route>
-          </Switch>
-        </FacultyFormat>
-      )}
+                        <Route exact path="/incharge">
+                            <InchargeDashboard />
+                        </Route>
 
-      {currentUser && userDetails && userDetails.role === "int_stu" && (
-        <InternalStudentFormat>
-          <Switch>
-            <Route exact path="/">
-              <InternalStudentDashboard />
-            </Route>
+                        <Route path="*">
+                            <PageNotFound />
+                        </Route>
+                    </Switch>
+                </FacultyFormat>
+            )}
 
-            <Route exact path="/equipments">
-              <Equipments />
-            </Route>
+            {currentUser && userDetails && userDetails.role === "int_stu" && (
+                <InternalStudentFormat>
+                    <Switch>
+                        <Route exact path="/">
+                            <InternalStudentDashboard />
+                        </Route>
 
-            <Route exact path="/cd-ord">
-              <CDORD />
-            </Route>
+                        <Route exact path="/equipments">
+                            <Equipments />
+                        </Route>
 
-            <Route exact path="/esr">
-              <ESR />
-            </Route>
+                        <Route exact path="/cd-ord">
+                            <CDORD />
+                        </Route>
 
-            <Route exact path="/icp-oes">
-              <ICPOES />
-            </Route>
+                        <Route exact path="/esr">
+                            <ESR />
+                        </Route>
 
-            <Route exact path="/pl">
-              <PL />
-            </Route>
+                        <Route exact path="/icp-oes">
+                            <ICPOES />
+                        </Route>
 
-            <Route path="*">
-              <PageNotFound />
-            </Route>
-          </Switch>
-        </InternalStudentFormat>
-      )}
-    </React.Fragment>
-  );
+                        <Route exact path="/pl">
+                            <PL />
+                        </Route>
+
+                        <Route path="*">
+                            <PageNotFound />
+                        </Route>
+                    </Switch>
+                </InternalStudentFormat>
+            )}
+        </React.Fragment>
+    );
 };
 
 export default ManagedRouter;

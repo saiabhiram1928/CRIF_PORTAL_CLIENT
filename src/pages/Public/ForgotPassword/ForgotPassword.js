@@ -1,20 +1,23 @@
 import React from "react";
-import styles from "./SignIn.module.css";
+import styles from "./ForgotPassword.module.css";
 import gstyles from "../../../styles/Global.module.css";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
 import { useAuth } from "../../../components/Authenticate/AuthContext";
+import { auth } from "../../../components/Authenticate/FirebaseApp";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import PuffLoader from "react-spinners/PuffLoader";
 import ErrorToast from "../../../components/Alerts/Toast/ErrorToast";
+import { Link } from "react-router-dom";
 
 import ColorPalette from "../../../styles/ColorPalette";
 
 const MySwal = withReactContent(Swal);
 
-const SignIn = () => {
+// ! Change Styling and file names for ForgotPassword page
+
+const ForgotPassword = () => {
     const {
         register,
         handleSubmit,
@@ -35,15 +38,18 @@ const SignIn = () => {
                         />
                     </div>
                 ),
-                text: "Signing In",
+                text: "Sending Link",
                 showConfirmButton: false,
                 showCancelButton: false,
                 allowOutsideClick: false,
                 allowEscapeKey: false,
                 allowEnterKey: false,
             });
-            await login(data.email, data.password).then(() => {
+            await auth.sendPasswordResetEmail(data.email).then((response) => {
                 MySwal.close();
+                toast(
+                    <ErrorToast message="Password Reset Link send successfully" />
+                );
             });
         } catch (err) {
             MySwal.close();
@@ -52,27 +58,33 @@ const SignIn = () => {
     };
 
     return (
-        <div className={styles["signin__root"]}>
-            <div className={styles["signin__topcolor"]}></div>
-            <div className={styles["signin__midcolor"]}></div>
-            <div className={styles["signin__bottomcolor"]}></div>
+        <div className={styles["forgotPassword__root"]}>
+            <div className={styles["forgotPassword__topcolor"]}></div>
+            <div className={styles["forgotPassword__midcolor"]}></div>
+            <div className={styles["forgotPassword__bottomcolor"]}></div>
 
-            <div className={styles["signin__card"]}>
-                <div className={styles["signin__card__logo__div"]}>
+            <div className={styles["forgotPassword__card"]}>
+                <div className={styles["forgotPassword__card__logo__div"]}>
                     <img
-                        className={styles["signin__card__logo__div__image"]}
+                        className={
+                            styles["forgotPassword__card__logo__div__image"]
+                        }
                         src={process.env.PUBLIC_URL + "/logo192b.png"}
                         alt=""
                     ></img>
-                    <p className={styles["signin__card__logo__div__text"]}>
+                    <p
+                        className={
+                            styles["forgotPassword__card__logo__div__text"]
+                        }
+                    >
                         Central Research Instrumentation Facility
                     </p>
                 </div>
 
-                <hr className={styles["signin__card__separator"]} />
+                <hr className={styles["forgotPassword__card__separator"]} />
 
                 <form
-                    className={styles["signin__card__form"]}
+                    className={styles["forgotPassword__card__form"]}
                     onSubmit={handleSubmit(onSubmit)}
                 >
                     <div
@@ -91,24 +103,6 @@ const SignIn = () => {
                                 "Email is Required"}
                         </p>
                     </div>
-
-                    <div
-                        className={gstyles["field-container"]}
-                        style={{ width: "100%", height: "3.4vw" }}
-                    >
-                        <input
-                            className={gstyles["text-field"]}
-                            style={{ width: "100%", height: "2.4vw" }}
-                            type="password"
-                            placeholder="Password"
-                            {...register("password", { required: true })}
-                        />
-                        <p className={gstyles["field-error"]}>
-                            {errors.password?.type === "required" &&
-                                "Password is Required"}
-                        </p>
-                    </div>
-
                     <input
                         className={gstyles["submit-button"]}
                         type="submit"
@@ -119,31 +113,21 @@ const SignIn = () => {
                             backgroundColor: ColorPalette.blue.primary,
                             fontSize: "1vw",
                         }}
-                        value="Login"
+                        value="Send password reset email"
                     ></input>
+                    <div className={styles["create-account"]}>
+                        <Link
+                            className={styles["create-account-link"]}
+                            to="/signin"
+                            replace
+                        >
+                            Login
+                        </Link>
+                    </div>
                 </form>
-                <div className={styles["create-account"]}>
-                    <Link
-                        className={styles["create-account-link"]}
-                        to="/signup"
-                        replace
-                    >
-                        Create Account Instead
-                    </Link>
-                </div>
-                <div className={styles["create-account"]}>
-                    <Link
-                        className={styles["create-account-link"]}
-                        style={{ marginBottom: "3px" }}
-                        to="/forgot-password"
-                        replace
-                    >
-                        Forgot Password
-                    </Link>
-                </div>
             </div>
         </div>
     );
 };
 
-export default SignIn;
+export default ForgotPassword;
