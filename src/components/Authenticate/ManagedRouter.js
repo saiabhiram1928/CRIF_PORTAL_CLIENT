@@ -8,6 +8,7 @@ import { useAuth } from "../Authenticate/AuthContext";
 import SignIn from "../../pages/Public/SignIn/SignIn";
 import SignUp from "../../pages/Public/SignUp/SignUp";
 import ForgotPassword from "../../pages/Public/ForgotPassword/ForgotPassword";
+import Home from "../../pages/Public/Home/Home";
 
 // <-- General -->
 import PageNotFound from "../../pages/Shared/PageNotFound";
@@ -45,21 +46,25 @@ const ManagedRouter = () => {
 
             {!currentUser && (
                 <Switch>
-                    <Route exact path="/">
-                        <SignIn />
+                    <Route exact path="/home">
+                      <Home />
                     </Route>
-
+                    <Route exact path="/signin">
+                      <SignIn />
+                    </Route>
+                
                     <Route exact path="/signup">
-                        <SignUp />
+                      <SignUp />
                     </Route>
-
+                
                     <Route exact path="/forgot-password">
                         <ForgotPassword />
                     </Route>
-
+                    
                     <Route path="*">
-                        <Redirect to="/" />
+                      <Redirect to="/home" />
                     </Route>
+
                 </Switch>
             )}
 
