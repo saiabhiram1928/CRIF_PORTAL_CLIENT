@@ -186,7 +186,7 @@ const SignUp = () => {
           ></input>
         </form>
         <div className={styles["create-account"]}>
-          <Link className={styles["create-account-link"]} to="/" replace>
+          <Link className={styles["create-account-link"]} to="/signin" replace>
             Login to Existing Account
           </Link>
         </div>
