@@ -42,8 +42,8 @@ const Dashboard = () => {
             }
         })
         await MySwal.fire({
-            title: 'Please check the file name?',
-            text: `The file name is ${file.value.name}`,
+            title: 'Please check the file name and application id ?',
+            text: `File name ${file.value.name} \n Application_id ${application_id}`,
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -584,6 +584,7 @@ const Dashboard = () => {
                                     >
                                         <div
                                             className={style["normal-button"]}
+
                                             onClick={async () => {
                                                 MySwal.fire({
                                                     width: "50%",
@@ -608,9 +609,13 @@ const Dashboard = () => {
                                                 VIEW PROOF OF PAYMENT
                                             </p>
                                         </div>
-                                        <div
+                                        <button
                                             className={style["reject-button"]}
-                                            onClick={async () => {
+                                            id ={item.application_id}
+                                            value={item.email}
+                                            onClick={async (e) => {
+                                                const application_id=e.target.id
+                                                const email=e.target.value
                                                 MySwal.fire({
                                                     width: "40%",
                                                     title: (
@@ -666,7 +671,7 @@ const Dashboard = () => {
                                                             {
                                                                 params: {
                                                                     application_id:
-                                                                        item.application_id,
+                                                                       application_id,
                                                                 },
                                                             }
                                                         );
@@ -676,10 +681,10 @@ const Dashboard = () => {
                                                             "/mailer/sendMail",
                                                             {
                                                                 params: {
-                                                                    email: item.email,
+                                                                    email: email,
                                                                     subject:
                                                                         "CRIF APPLICATION REJECTED",
-                                                                    message: `You application (id : ${item.application_id}) has been rejected`,
+                                                                    message: `You application (id : ${application_id}) has been rejected`,
                                                                     // attachement :false 
                                                                 },
                                                             }
@@ -705,15 +710,19 @@ const Dashboard = () => {
                                                 });
                                             }}
                                         >
-                                            <p className={style["button-text"]}>
                                                 REJECT APPLICATION
-                                            </p>
-                                        </div>
+                                            
+                                        </button>
                                         {
                                             item.status === "INCHARGE REVIEW" ? (
-                                                <div
+                                                <button
                                                     className={style["approve-button"]}
-                                                    onClick={() => {
+                                                    value ={item.email}
+                                                    id={item.application_id}
+                                                    onClick={async (e) => {
+                                                        const application_id =e.target.id
+                                                        const email =e.target.value
+                                                        console.log(application_id , email)
                                                         MySwal.fire({
                                                             width: "40%",
                                                             title: (
@@ -770,7 +779,7 @@ const Dashboard = () => {
                                                                     {
                                                                         params: {
                                                                             application_id:
-                                                                                item.application_id,
+                                                                                application_id,
                                                                         },
                                                                     }
                                                                 );
@@ -780,10 +789,10 @@ const Dashboard = () => {
                                                                     "/mailer/sendMail",
                                                                     {
                                                                         params: {
-                                                                            email: item.email,
+                                                                            email: email,
                                                                             subject:
                                                                                 "CRIF APPLICATION APPROVED BY FACULTY INCHARGE",
-                                                                            message: `Your application (id : ${item.application_id}) has been been forwarded to Admin`,
+                                                                            message: `Your application (id : ${application_id}) has been been forwarded to Admin`,
                                                                         },
                                                                     }
                                                                 );
@@ -807,26 +816,20 @@ const Dashboard = () => {
                                                             }
                                                         });
                                                     }}
+                                                    
                                                 >
-                                                    <p className={style["button-text"]}>
-                                                       APPROVE APPLICATION
-                                                    </p>
 
-                                                </div>
+                                                     {item.application_id}
+
+                                                </button>
 
                                             ) : (
-                                                (<div className={style["approve-button"]}>
-                                                    <button className={style["button-text"]} style={{
-                                                        background: "none",
-                                                        color: "inherit",
-                                                        border: "none",
-                                                        font: "inherit",
-                                                        cursor: "pointer",
-                                                        outline: "inherit",
-                                                    }} onClick={(e) => handleUpload(e)} value={item.email} id={item.application_id}>
-                                                        Results
-                                                    </button>
-                                                </div>)
+                                                (<button className={style["approve-button"]} onClick={(e) => handleUpload(e)}
+                                                 value={item.email} id={item.application_id} >
+
+                                                        {item.email}
+
+                                                </button>)
                                             )
                                         }
                                     </div>
