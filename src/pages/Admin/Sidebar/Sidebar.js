@@ -4,7 +4,7 @@ import { useAuth } from "../../../components/Authenticate/AuthContext";
 import { useLocation } from "react-router-dom";
 import { BsGrid1X2Fill, BsFillGearFill } from "react-icons/bs";
 import { FaStickyNote } from "react-icons/fa";
-
+import {AiOutlineFileDone} from "react-icons/ai";
 import Avatar from "../../../components/UIElements/Avatar/Avatar";
 import NavLinkBox from "../../../components/Navigation/NavLinkBox/NavLinkBox";
 import MarginBox from "../../../components/Utility/MarginBox";
@@ -50,6 +50,12 @@ const Sidebar = () => {
                 path={path}
                 icon={<BsFillGearFill />}
                 text="Manage Equipments"
+            ></NavLinkBox>
+            <NavLinkBox
+                to="/Results"
+                path={path}
+                icon={<AiOutlineFileDone />}
+                text="Results"
             ></NavLinkBox>
         </div>
     );
