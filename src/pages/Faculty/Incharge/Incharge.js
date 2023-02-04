@@ -5,7 +5,8 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import PuffLoader from "react-spinners/PuffLoader";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 import { useAuth } from "../../../components/Authenticate/AuthContext";
 
 import MainContent from "../../../components/Wrapper/MainContent/MainContent";
@@ -16,6 +17,10 @@ import Loading from "../../../components/Navigation/Loading/Loading";
 import MarginBox from "../../../components/Utility/MarginBox";
 import GridCard from "../../../components/Grid/GridCard/GridCard";
 import ColorPalette from "../../../styles/ColorPalette";
+import { ClickAwayListener, ListItemSecondaryAction } from "@material-ui/core";
+import { set } from "react-hook-form";
+import { BsCheckLg } from "react-icons/bs";
+
 
 const MySwal = withReactContent(Swal);
 
@@ -24,15 +29,115 @@ const Dashboard = () => {
     const [loadingData, setLoadingData] = useState(true);
     const [isIncharge, setIsIncharge] = useState(false);
     const [applications, setApplications] = useState([]);
-
     const isMounted = useIsMounted();
+    const handleUpload = async (e) => {
+        const application_id = e.target.id;
+        const student_mail = e.target.value;
+        const file = await MySwal.fire({
+            title: 'upload',
+            input: 'file',
+            inputAttributes: {
+                'accept': 'image/* ,.pdf, .zip ',
+                'aria-label': 'Upload the results'
+            }
+        })
+        await MySwal.fire({
+            title: 'Please check the file name?',
+            text: `The file name is ${file.value.name}`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, Upload it!'
+        }).then(async (result) => {
+            if (file.value && result.isConfirmed) {
+                const formData = new FormData();
+                formData.append("file", file.value)
+                console.log(file.value, application_id)
+                await axios
+                    .post(
+                        process.env.REACT_APP_BACKEND_API_URL +
+                        "/files/uploadResults",
+                        formData,
+                        {
+                            params: { email: student_mail, application_id: application_id, folderName: "Results" },
+                        }
+                    ).then(async (res) => {
+                        if (res.status === 200) {
+                            MySwal.fire({
+                                icon: 'success',
+                                title: 'File is successfully uploaded',
+                                text: "Results are sent to your mail",
+                                showConfirmButton: false,
+                                allowOutsideClick: false,
+                                allowEscapeKey: false,
+                                allowEnterKey: false,
+                                timer: 4000
+                            })
+                            await axios.get(
+                                process.env
+                                    .REACT_APP_BACKEND_API_URL +
+                                "/applications/inchargeUploadedResults",
+                                {
+                                    params: {
+                                        application_id: application_id,
+                                    },
+                                }
+                            );
+                            const resofMail = await axios.get(
+                                process.env
+                                    .REACT_APP_BACKEND_API_URL +
+                                "/mailer/sendResultsToMail",
+                                {
+                                    params: {
+                                        email: student_mail,
+                                        application_id: application_id,
+                                        subject:
+                                            "CRIF UPLOADED THE RESULTS",
+                                        message: `Please Check the Attacments for Results \n Application : ${application_id} \n Account : ${student_mail} `,
+                                    },
+                                }
+                            )
+                            MySwal.close();
+                            if (resofMail.status === 404) {
+                                toast.dark(
+                                    <ErrorToast
+                                        message={res.response.data.message || res.message}
+                                    />
+                                )
+                            } else {
+                                toast.success(`Mail Sent Successfully to ${student_mail}`, {
+                                    position: toast.POSITION.TOP_CENTER
+                                })
+                            }
+                            getApplicationsData();
+
+                        }
+                    }).catch((err) => {
+                        toast.dark(
+                            <ErrorToast
+                                message={err.response.data.message || err.message}
+                            />
+                        )
+                    })
+            } else if (!file.value) {
+                await MySwal.fire({
+                    icon: 'error',
+                    title: 'Please upload the file!',
+                    showCancelButton: false,
+                    allowEscapeKey: false,
+                })
+            }
+        })
+    }
+
 
     useEffect(() => {
         const checkIfIncharge = async () => {
             await axios
                 .get(
                     process.env.REACT_APP_BACKEND_API_URL +
-                        "/equipments/checkIfIncharge",
+                    "/equipments/checkIfIncharge",
                     {
                         params: { email: userDetails.email },
                     }
@@ -56,11 +161,12 @@ const Dashboard = () => {
     }, [isMounted]);
 
     const getApplicationsData = useCallback(async () => {
+
         setLoadingData(true);
         await axios
             .get(
                 process.env.REACT_APP_BACKEND_API_URL +
-                    "/applications/getAllForFaculty",
+                "/applications/getAllForIncharge",
                 {
                     params: {
                         name:
@@ -71,9 +177,14 @@ const Dashboard = () => {
                     },
                 }
             )
+
             .then(async (response) => {
+
+
                 let applicationsRender = [];
+                // console.log(response);
                 if (response.data.length > 0) {
+
                     for (var item of response.data) {
                         // ? Do something about this logic :
                         // TODO: Currently image is coming using statically served link from backend. Ultimate goal to preserve privacy is to send image as the stream of data to frontend. Convert that data to bit64 then serve it as an image.
@@ -84,7 +195,7 @@ const Dashboard = () => {
                         try {
                             image = await axios.post(
                                 process.env.REACT_APP_BACKEND_API_URL +
-                                    "/files/downloadPaymentSlip",
+                                "/files/downloadPaymentSlip",
                                 {
                                     params: {
                                         email: item.email,
@@ -506,7 +617,7 @@ const Dashboard = () => {
                                                         <p
                                                             className={
                                                                 gstyles[
-                                                                    "alert-title"
+                                                                "alert-title"
                                                                 ]
                                                             }
                                                         >
@@ -527,7 +638,7 @@ const Dashboard = () => {
                                                                 <div
                                                                     className={
                                                                         gstyles[
-                                                                            "alert-loader"
+                                                                        "alert-loader"
                                                                         ]
                                                                     }
                                                                 >
@@ -551,7 +662,7 @@ const Dashboard = () => {
                                                         await axios.get(
                                                             process.env
                                                                 .REACT_APP_BACKEND_API_URL +
-                                                                "/applications/rejectApplication",
+                                                            "/applications/rejectApplication",
                                                             {
                                                                 params: {
                                                                     application_id:
@@ -562,13 +673,14 @@ const Dashboard = () => {
                                                         await axios.get(
                                                             process.env
                                                                 .REACT_APP_BACKEND_API_URL +
-                                                                "/mailer/sendMail",
+                                                            "/mailer/sendMail",
                                                             {
                                                                 params: {
                                                                     email: item.email,
                                                                     subject:
                                                                         "CRIF APPLICATION REJECTED",
                                                                     message: `You application (id : ${item.application_id}) has been rejected`,
+                                                                    // attachement :false 
                                                                 },
                                                             }
                                                         );
@@ -579,7 +691,7 @@ const Dashboard = () => {
                                                                 <p
                                                                     className={
                                                                         gstyles[
-                                                                            "alert-title"
+                                                                        "alert-title"
                                                                         ]
                                                                     }
                                                                 >
@@ -597,107 +709,126 @@ const Dashboard = () => {
                                                 REJECT APPLICATION
                                             </p>
                                         </div>
-                                        <div
-                                            className={style["approve-button"]}
-                                            onClick={async () => {
-                                                MySwal.fire({
-                                                    width: "40%",
-                                                    title: (
-                                                        <p
-                                                            className={
-                                                                gstyles[
-                                                                    "alert-title"
-                                                                ]
-                                                            }
-                                                        >
-                                                            Are You Sure ?
-                                                        </p>
-                                                    ),
-                                                    text: "This Operation will Approve this Application",
-                                                    showCancelButton: true,
-                                                    confirmButtonText:
-                                                        "Approve",
-                                                    allowOutsideClick: false,
-                                                    allowEscapeKey: false,
-                                                    allowEnterKey: false,
-                                                }).then(async (result) => {
-                                                    if (result.isConfirmed) {
+                                        {
+                                            item.status === "INCHARGE REVIEW" ? (
+                                                <div
+                                                    className={style["approve-button"]}
+                                                    onClick={() => {
                                                         MySwal.fire({
                                                             width: "40%",
-                                                            title: (
-                                                                <div
-                                                                    className={
-                                                                        gstyles[
-                                                                            "alert-loader"
-                                                                        ]
-                                                                    }
-                                                                >
-                                                                    <PuffLoader
-                                                                        color={
-                                                                            ColorPalette
-                                                                                .purple
-                                                                                .primary
-                                                                        }
-                                                                        size="4vw"
-                                                                    />
-                                                                </div>
-                                                            ),
-                                                            text: "Approving Application",
-                                                            showConfirmButton: false,
-                                                            showCancelButton: false,
-                                                            allowOutsideClick: false,
-                                                            allowEscapeKey: false,
-                                                            allowEnterKey: false,
-                                                        });
-                                                        await axios.get(
-                                                            process.env
-                                                                .REACT_APP_BACKEND_API_URL +
-                                                                "/applications/inchargeApproveApplication",
-                                                            {
-                                                                params: {
-                                                                    application_id:
-                                                                        item.application_id,
-                                                                },
-                                                            }
-                                                        );
-                                                        await axios.get(
-                                                            process.env
-                                                                .REACT_APP_BACKEND_API_URL +
-                                                                "/mailer/sendMail",
-                                                            {
-                                                                params: {
-                                                                    email: item.email,
-                                                                    subject:
-                                                                        "CRIF APPLICATION APPROVED BY FACULTY INCHARGE",
-                                                                    message: `Your application (id : ${item.application_id}) has been been forwarded to Admin`,
-                                                                },
-                                                            }
-                                                        );
-                                                        MySwal.close();
-                                                        getApplicationsData();
-                                                        MySwal.fire({
                                                             title: (
                                                                 <p
                                                                     className={
                                                                         gstyles[
-                                                                            "alert-title"
+                                                                        "alert-title"
                                                                         ]
                                                                     }
                                                                 >
-                                                                    Application
-                                                                    Approved
-                                                                    Successfully
+                                                                    Are You Sure ?
                                                                 </p>
                                                             ),
+                                                            text: "This Operation will Approve this Application",
+                                                            showCancelButton: true,
+                                                            confirmButtonText:
+                                                                "Approve",
+                                                            allowOutsideClick: false,
+                                                            allowEscapeKey: false,
+                                                            allowEnterKey: false,
+                                                        }).then(async (result) => {
+                                                            if (result.isConfirmed) {
+                                                                MySwal.fire({
+                                                                    width: "40%",
+                                                                    title: (
+                                                                        <div
+                                                                            className={
+                                                                                gstyles[
+                                                                                "alert-loader"
+                                                                                ]
+                                                                            }
+                                                                        >
+                                                                            <PuffLoader
+                                                                                color={
+                                                                                    ColorPalette
+                                                                                        .purple
+                                                                                        .primary
+                                                                                }
+                                                                                size="4vw"
+                                                                            />
+                                                                        </div>
+                                                                    ),
+                                                                    text: "Approving Application",
+                                                                    showConfirmButton: false,
+                                                                    showCancelButton: false,
+                                                                    allowOutsideClick: false,
+                                                                    allowEscapeKey: false,
+                                                                    allowEnterKey: false,
+                                                                });
+                                                                await axios.get(
+                                                                    process.env
+                                                                        .REACT_APP_BACKEND_API_URL +
+                                                                    "/applications/inchargeApproveApplication",
+                                                                    {
+                                                                        params: {
+                                                                            application_id:
+                                                                                item.application_id,
+                                                                        },
+                                                                    }
+                                                                );
+                                                                await axios.get(
+                                                                    process.env
+                                                                        .REACT_APP_BACKEND_API_URL +
+                                                                    "/mailer/sendMail",
+                                                                    {
+                                                                        params: {
+                                                                            email: item.email,
+                                                                            subject:
+                                                                                "CRIF APPLICATION APPROVED BY FACULTY INCHARGE",
+                                                                            message: `Your application (id : ${item.application_id}) has been been forwarded to Admin`,
+                                                                        },
+                                                                    }
+                                                                );
+                                                                MySwal.close();
+                                                                getApplicationsData();
+                                                                MySwal.fire({
+                                                                    title: (
+                                                                        <p
+                                                                            className={
+                                                                                gstyles[
+                                                                                "alert-title"
+                                                                                ]
+                                                                            }
+                                                                        >
+                                                                            Application
+                                                                            Approved
+                                                                            Successfully
+                                                                        </p>
+                                                                    ),
+                                                                });
+                                                            }
                                                         });
-                                                    }
-                                                });
-                                            }}
-                                        >
-                                            <p className={style["button-text"]}>
-                                                APPROVE APPLICATION
-                                            </p>
-                                        </div>
+                                                    }}
+                                                >
+                                                    <p className={style["button-text"]}>
+                                                       APPROVE APPLICATION
+                                                    </p>
+
+                                                </div>
+
+                                            ) : (
+                                                (<div className={style["approve-button"]}>
+                                                    <button className={style["button-text"]} style={{
+                                                        background: "none",
+                                                        color: "inherit",
+                                                        border: "none",
+                                                        font: "inherit",
+                                                        cursor: "pointer",
+                                                        outline: "inherit",
+                                                    }} onClick={(e) => handleUpload(e)} value={item.email} id={item.application_id}>
+                                                        Results
+                                                    </button>
+                                                </div>)
+                                            )
+                                        }
                                     </div>
                                 </div>
                             </div>
