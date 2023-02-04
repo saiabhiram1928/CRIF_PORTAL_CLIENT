@@ -5,6 +5,7 @@ import { useLocation } from "react-router-dom";
 import { BsGrid1X2Fill } from "react-icons/bs";
 import { AiTwotoneExperiment } from "react-icons/ai";
 
+import {AiOutlineFileDone} from "react-icons/ai";
 import Avatar from "../../../components/UIElements/Avatar/Avatar";
 import NavLinkBox from "../../../components/Navigation/NavLinkBox/NavLinkBox";
 import MarginBox from "../../../components/Utility/MarginBox";
@@ -44,6 +45,12 @@ const Sidebar = () => {
         path={path}
         icon={<AiTwotoneExperiment />}
         text="Equipments"
+      ></NavLinkBox>
+      <NavLinkBox
+        to="/results"
+        path={path}
+        icon={<AiOutlineFileDone />}
+        text="Results"
       ></NavLinkBox>
     </div>
   );

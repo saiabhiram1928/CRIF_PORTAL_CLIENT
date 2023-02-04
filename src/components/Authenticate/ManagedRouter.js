@@ -8,7 +8,6 @@ import { useAuth } from "../Authenticate/AuthContext";
 import SignIn from "../../pages/Public/SignIn/SignIn";
 import SignUp from "../../pages/Public/SignUp/SignUp";
 import ForgotPassword from "../../pages/Public/ForgotPassword/ForgotPassword";
-import Home from "../../pages/Public/Home/Home";
 
 // <-- General -->
 import PageNotFound from "../../pages/Shared/PageNotFound";
@@ -35,6 +34,10 @@ import ESR from "../../pages/Shared/ESR";
 import ICPOES from "../../pages/Shared/ICPOES";
 import PL from "../../pages/Shared/PL";
 
+// <-- Results-->
+import Superuser from "../Results/Superuser";
+import Student from "../Results/Student";
+
 const ManagedRouter = () => {
     const { userDetails, currentUser } = useAuth();
     return (
@@ -46,25 +49,21 @@ const ManagedRouter = () => {
 
             {!currentUser && (
                 <Switch>
-                    <Route exact path="/home">
-                      <Home />
-                    </Route>
-                    <Route exact path="/signin">
-                      <SignIn />
-                    </Route>
-                
-                    <Route exact path="/signup">
-                      <SignUp />
-                    </Route>
-                
-                    <Route exact path="/forgot-password">
-                        <ForgotPassword />
-                    </Route>
-                    
-                    <Route path="*">
-                      <Redirect to="/home" />
+                    <Route exact path="/">
+                        <SignIn />
                     </Route>
 
+                    <Route exact path="/signup">
+                        <SignUp />
+                    </Route>
+
+                    <Route exact path="/forgot-password">
+                        <ForgotPassword />
+                    </Route> 
+
+                    <Route path="*">
+                        <Redirect to="/" />
+                    </Route>
                 </Switch>
             )}
 
@@ -82,7 +81,9 @@ const ManagedRouter = () => {
                         <Route exact path="/applications">
                             <Applications />
                         </Route>
-
+                        <Route exact path="/results">
+                            <Superuser/>
+                          </Route>
                         <Route path="*">
                             <PageNotFound />
                         </Route>
@@ -100,6 +101,9 @@ const ManagedRouter = () => {
                         <Route exact path="/incharge">
                             <InchargeDashboard />
                         </Route>
+                        <Route exact path="/results">
+                         <Superuser />
+                       </Route>
 
                         <Route path="*">
                             <PageNotFound />
@@ -134,6 +138,9 @@ const ManagedRouter = () => {
                         <Route exact path="/pl">
                             <PL />
                         </Route>
+                        <Route exact path="/results">
+                            <Student/>
+                         </Route>
 
                         <Route path="*">
                             <PageNotFound />

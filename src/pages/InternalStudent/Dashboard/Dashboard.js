@@ -40,14 +40,13 @@ const Dashboard = () => {
         const formData = new FormData();
         const id = e.target.id.split("-")[1];
         formData.append("file", file[id]);
-        console.log(file);
         await axios
             .post(
                 process.env.REACT_APP_BACKEND_API_URL +
                     "/files/uploadPaymentSlip",
                 formData,
                 {
-                    params: { email: userDetails.email, application_id: id },
+                    params: { email: userDetails.email, application_id: id , folderName : "PaymentSlip"},
                 }
             )
             .then((res) => {

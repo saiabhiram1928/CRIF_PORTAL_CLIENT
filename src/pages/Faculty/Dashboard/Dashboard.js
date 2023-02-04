@@ -465,9 +465,13 @@ const Dashboard = () => {
                                                 VIEW PROOF OF PAYMENT
                                             </p>
                                         </div>
-                                        <div
+                                        <button
                                             className={style["reject-button"]}
-                                            onClick={async () => {
+                                            value={item.email}
+                                            id={item.application_id}
+                                            onClick={async (e) => {
+                                                const email=e.target.value
+                                                const application_id=e.target.id
                                                 MySwal.fire({
                                                     width: "40%",
                                                     title: (
@@ -523,7 +527,7 @@ const Dashboard = () => {
                                                             {
                                                                 params: {
                                                                     application_id:
-                                                                        item.application_id,
+                                                                        application_id,
                                                                 },
                                                             }
                                                         );
@@ -533,10 +537,10 @@ const Dashboard = () => {
                                                                 "/mailer/sendMail",
                                                             {
                                                                 params: {
-                                                                    email: item.email,
+                                                                    email: email,
                                                                     subject:
                                                                         "CRIF APPLICATION REJECTED",
-                                                                    message: `You application (id : ${item.application_id}) has been rejected`,
+                                                                    message: `You application (id : ${application_id}) has been rejected`,
                                                                 },
                                                             }
                                                         );
@@ -561,13 +565,16 @@ const Dashboard = () => {
                                                 });
                                             }}
                                         >
-                                            <p className={style["button-text"]}>
+
                                                 REJECT APPLICATION
-                                            </p>
-                                        </div>
+                                        </button>
                                         <div
                                             className={style["approve-button"]}
-                                            onClick={async () => {
+                                            value={item.email}
+                                            id={item.application_id}
+                                            onClick={async (e) => {
+                                                const email=e.target.value
+                                                const applicaton_id=e.target.id
                                                 MySwal.fire({
                                                     width: "40%",
                                                     title: (
@@ -624,7 +631,7 @@ const Dashboard = () => {
                                                             {
                                                                 params: {
                                                                     application_id:
-                                                                        item.application_id,
+                                                                        applicaton_id,
                                                                 },
                                                             }
                                                         );
@@ -634,10 +641,10 @@ const Dashboard = () => {
                                                                 "/mailer/sendMail",
                                                             {
                                                                 params: {
-                                                                    email: item.email,
+                                                                    email: email,
                                                                     subject:
                                                                         "CRIF APPLICATION APPROVED BY FACULTY",
-                                                                    message: `You application (id : ${item.application_id}) has been been forwarded to faculty in-charge`,
+                                                                    message: `You application (id : ${applicaton_id}}) has been been forwarded to faculty in-charge`,
                                                                 },
                                                             }
                                                         );
@@ -662,9 +669,8 @@ const Dashboard = () => {
                                                 });
                                             }}
                                         >
-                                            <p className={style["button-text"]}>
-                                                APPROVE APPLICATION
-                                            </p>
+
+                                                {item.application_id}
                                         </div>
                                     </div>
                                 </div>

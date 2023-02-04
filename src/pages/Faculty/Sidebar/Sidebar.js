@@ -3,7 +3,7 @@ import styles from "./Sidebar.module.css";
 import { useAuth } from "../../../components/Authenticate/AuthContext";
 import { useLocation } from "react-router-dom";
 import { BsFillCheckCircleFill, BsShieldFillCheck } from "react-icons/bs";
-
+import {AiOutlineFileDone} from "react-icons/ai";
 import Avatar from "../../../components/UIElements/Avatar/Avatar";
 import NavLinkBox from "../../../components/Navigation/NavLinkBox/NavLinkBox";
 import MarginBox from "../../../components/Utility/MarginBox";
@@ -43,6 +43,12 @@ const Sidebar = () => {
         path={path}
         icon={<BsShieldFillCheck />}
         text="Incharge Approval"
+      ></NavLinkBox>
+      <NavLinkBox
+        to="/results"
+        path={path}
+        icon={<AiOutlineFileDone />}
+        text="Results"
       ></NavLinkBox>
     </div>
   );
